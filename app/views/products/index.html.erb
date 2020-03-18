@@ -1,1 +1,38 @@
 <h1>This is product index page</h1>
+<% if current_user && current_user.is_admin %>
+<%= link_to 'Add Product', new_product_path, class: 'ui blue button'%>
+<% end %>
+<%=link_to 'Home', root_path, class: 'ui blue button'%>
+<h2>Products</h2>
+<table id="Product List" class="ui celled table" style="width:70%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>Description</th>
+                <th>Know More</th>
+                <% if current_user && current_user.is_admin %>
+                    <th>Edit</th>
+                    <th>Delete</th>   
+                <% end %>         
+            </tr>
+        </thead>
+        <tbody>
+            <%@products.each do |product|%>
+            <tr>
+                <td><%=product.name%></td>
+                <td><%=product.price%></td>
+                <td>
+                    <%=product.in_stock ? "YES" : "NO" %>
+                </td>
+                <td><%=product.description%></td>
+                <td><%= link_to 'View More', product, class: 'ui blue button'%></td>
+                <% if current_user && current_user.is_admin %>
+                    <td><%= link_to 'Edit', edit_product_path(product.id), class: 'ui blue button'%></td>
+                    <td><%= link_to 'Delete', product, method: :delete, data: {confirm: 'Are you sure?'}, class: 'ui blue button'%></td>
+                <% end %>
+            </tr>
+            <%end%>
+        </tbody>
+</table>

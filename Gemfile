@@ -23,10 +23,9 @@ gem 'yarn', '~> 0.1.1'
 
 gem 'nodejs-rails', '~> 0.0.1'
 
-gem "react_on_rails", "11.1.4" # Update to the current version
-gem "webpacker", "~> 3" # Newer versions might be supported
 
 gem 'devise', '~> 4.2'
+
 
 gem 'coffee-script-source', '1.8.0' 
 # Use CoffeeScript for .coffee assets and views

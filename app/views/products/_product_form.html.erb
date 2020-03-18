@@ -1,0 +1,37 @@
+<div class="ui form" style= "width:50%">
+    <div class="field">
+        <%= form_for(products) do |form| %>
+            <div class="sixteen wide fields">
+                <p class= "inline field">
+                    <%= form.label :Name %>
+                    <%= form.text_field :name %>
+                </p>
+                <p class= "inline field">
+                    <%= form.label :Price %>
+                    <%=form.number_field :price %>
+                </p>
+            </div>
+            <div class="fifteen wide field">
+            <p>
+                <%= form.label :Description %>
+                <%= form.text_area :description %>
+                <!--category-->
+            </p>
+            </div>  
+            <div class="fifteen wide fields">
+            <p class= "inline field">
+                <%= form.label :"is in stock" %>
+                <%= form.check_box :in_stock %>
+            </p>
+            <p class= "inline field">
+                <%= form.label :"Categories:" %>
+            </p>
+                <%= form.select :product_category_id, options_for_select(ProductCategory.all.map{|p|[p.name, p.id]}) %>
+            </div>
+            <p class= "field">
+                <%=link_to 'Back', products_path, class: 'ui blue button'%>
+                <%= form.submit 'Submit', :class => 'ui blue button' %>
+            </p>
+        <% end %>
+    </div>
+</div>

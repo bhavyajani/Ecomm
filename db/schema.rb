@@ -10,24 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200312060830) do
+ActiveRecord::Schema.define(version: 20200318063312) do
 
   create_table "product_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
-    t.string "Name"
-    t.text "Description"
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
-    t.string "Name"
-    t.text "Description"
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "product_category_id"
     t.decimal "price", precision: 10
     t.boolean "in_stock"
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "products", "product_categories"
