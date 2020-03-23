@@ -3,8 +3,11 @@
 <%= link_to 'Add Product', new_product_path, class: 'ui blue button'%>
 <% end %>
 <%=link_to 'Home', root_path, class: 'ui blue button'%>
+<% if current_user %>
+<%= link_to "Cart #{current_order.order_details.size}", carts_path, class: 'ui blue button'%>
+<% end %>
 <h2>Products</h2>
-<table id="Product List" class="ui celled table" style="width:70%">
+<table id="Product List" class="ui celled table" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -12,6 +15,9 @@
                 <th>Available</th>
                 <th>Description</th>
                 <th>Know More</th>
+                <% if current_user %>
+                    <th>Buy</th>
+                <% end %>
                 <% if current_user && current_user.is_admin %>
                     <th>Edit</th>
                     <th>Delete</th>   
@@ -28,6 +34,15 @@
                 </td>
                 <td><%=product.description%></td>
                 <td><%= link_to 'View More', product, class: 'ui blue button'%></td>
+                <% if current_user %>
+                    <td>
+                        <%= form_for @order_detail do |add| %>
+                            <%= add.hidden_field :product_id, :value => product.id %>
+                            <%= add.number_field :quantity, :value => 1, :min => 1 %>
+                            <%= add.submit 'Add To Cart' %>
+                        <% end %>
+                    </td>
+                <% end %>
                 <% if current_user && current_user.is_admin %>
                     <td><%= link_to 'Edit', edit_product_path(product.id), class: 'ui blue button'%></td>
                     <td><%= link_to 'Delete', product, method: :delete, data: {confirm: 'Are you sure?'}, class: 'ui blue button'%></td>
