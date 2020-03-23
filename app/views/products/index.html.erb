@@ -4,7 +4,9 @@
 <% end %>
 <%=link_to 'Home', root_path, class: 'ui blue button'%>
 <% if current_user %>
-<%= link_to "Cart #{current_order.order_details.size}", carts_path, class: 'ui blue button'%>
+<div id="cart" style= "float:right">
+    <%= render 'carts/cart'%>
+</div>
 <% end %>
 <h2>Products</h2>
 <table id="Product List" class="ui celled table" style="width:100%">
@@ -36,10 +38,10 @@
                 <td><%= link_to 'View More', product, class: 'ui blue button'%></td>
                 <% if current_user %>
                     <td>
-                        <%= form_for @order_detail do |add| %>
+                        <%= form_for @order_details, remote: true do |add| %>
                             <%= add.hidden_field :product_id, :value => product.id %>
                             <%= add.number_field :quantity, :value => 1, :min => 1 %>
-                            <%= add.submit 'Add To Cart' %>
+                            <%= add.submit 'Add To Cart', class: 'ui blue button' %>
                         <% end %>
                     </td>
                 <% end %>

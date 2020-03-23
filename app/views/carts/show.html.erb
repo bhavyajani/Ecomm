@@ -1,1 +1,22 @@
-<h3>Subtotal:  <%= "#{current_order.total_amount}" %></h3>
+<%= link_to 'Back', products_path, class: 'ui blue button'%>
+<br>
+<br>
+<br>
+<% @order_details.each do |item| %>
+    <p><%= item.product.name %></p>
+    <p><%= item.product.price %></p>
+
+    <%=  form_for item do |form| %>
+        <%= form.hidden_field :product_id, :value => item.product.id %>
+        <%= form.number_field :quantity, :value => item.quantity.to_i, :min => 1 %>
+        <%= form.submit "update quantity", class: 'ui blue button' %>
+    <% end %>
+    <%= link_to 'Remove', item, method: :delete, data: {confirm: 'Are you sure?'}, class: 'ui blue button'%>
+    <br>
+    <b>Subtotal: <%= item.sub_total %></b>
+    <br>
+    <br>
+<% end %>
+<h3>Total:  <%= "#{current_order.total_amount}" %></h3>
+<%= link_to 'Checkout', orders_path,  class: 'ui blue button'%>
+    

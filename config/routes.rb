@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   resources :products
   resources :order_details
   resource :carts, only:[:show]
+  resource :orders, only:[:show]
 
 end

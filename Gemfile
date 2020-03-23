@@ -26,6 +26,7 @@ gem 'nodejs-rails', '~> 0.0.1'
 
 gem 'devise', '~> 4.2'
 
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 
 gem 'coffee-script-source', '1.8.0' 
 # Use CoffeeScript for .coffee assets and views

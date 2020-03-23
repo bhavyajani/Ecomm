@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     
     def index
         @products = Product.all
-        @order_detail = current_order.order_details.new
+        @order_details = current_order.order_details.new
     end
   
     def create

@@ -1,8 +1,8 @@
 class OrderDetail < ApplicationRecord
     belongs_to :product
     belongs_to :order
-    before_create :set_unit_price
-    before_create :set_sub_total
+    before_save :set_unit_price
+    before_save :set_sub_total
 
     def unit_price
         if persisted?
