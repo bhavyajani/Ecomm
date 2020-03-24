@@ -1,1 +1,19 @@
-<h1>Your order will get placed here</h1>
+<h1><%= @title %></h1>
+<b>Order Details:</b>
+<% @order_details.each do |item| %>
+    <p><b>Name: </b><%= item.product.name %></p>
+    <p><b>Price: </b><%= item.product.price %></p>
+    <p><b>Quantity: </b><%= item.quantity %></p>
+    <p><b>Subtotal: </b><%= item.sub_total %></p>
+    <br>
+    <br>
+<% end %>
+<% if @order.status == 'pending' %>
+    <%= link_to  'Place Order', button_path, method: :post, class: 'ui blue button'  %>
+<% end %>
+<% if @order.status != 'placed' %>
+    <%= link_to 'Cancel', carts_path, class: 'ui blue button' %>
+<% end %>
+<% if @order.status == 'placed' %>
+    <%= link_to 'back', products_path, class: 'ui blue button' %>
+<% end %>

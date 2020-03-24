@@ -1,4 +1,3 @@
-<%= link_to 'Back', products_path, class: 'ui blue button'%>
 <br>
 <br>
 <br>
@@ -17,6 +16,9 @@
     <br>
     <br>
 <% end %>
+<b><%= @body %></b>
 <h3>Total:  <%= "#{current_order.total_amount}" %></h3>
-<%= link_to 'Checkout', orders_path,  class: 'ui blue button'%>
-    
+<% if current_order.order_details.size > 0 %>
+    <%= link_to 'Checkout', orders_path,  class: 'ui blue button'%>
+<% end %>
+<%= link_to 'Continue Shopping', products_path, class: 'ui blue button'%>

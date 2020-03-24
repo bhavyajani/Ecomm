@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :order_details
   resource :carts, only:[:show]
   resource :orders, only:[:show]
+  post '/button', to: 'orders#update_cart_status'
 
 end

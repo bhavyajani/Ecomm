@@ -15,6 +15,7 @@ class OrderDetailsController < ApplicationController
         end  
         @order.save!
         current_user.is_cart_empty = false
+        current_user.save!
         session[:order_id] = @order.id
     end
 
