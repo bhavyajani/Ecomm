@@ -12,10 +12,10 @@ class OrderDetailsController < ApplicationController
            @order_detail.save!
         else    
             @order_details = @order.order_details.new(order_params)
+            current_user.is_cart_empty = false
+            current_user.save!
         end  
         @order.save!
-        current_user.is_cart_empty = false
-        current_user.save!
         session[:order_id] = @order.id
     end
 

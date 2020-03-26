@@ -48,9 +48,10 @@ class ProductsController < ApplicationController
     end
   
     def destroy
-        @products.destroy
+        @products.in_stock = false
+        @products.save!
         respond_to do |format|
-            format.html { redirect_to products_path, notice: 'Product was deleted.' }
+            format.html { redirect_to products_path, notice: 'Product status changed to out of stock.' }
         end
     end
     

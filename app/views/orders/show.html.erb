@@ -8,6 +8,9 @@
     <br>
     <br>
 <% end %>
+<b>Total: <%= @order.total_amount %> </b>
+<br>
+<br>
 <% if @order.status == 'pending' %>
     <%= link_to  'Place Order', button_path, method: :post, class: 'ui blue button'  %>
 <% end %>
@@ -15,5 +18,5 @@
     <%= link_to 'Cancel', carts_path, class: 'ui blue button' %>
 <% end %>
 <% if @order.status == 'placed' %>
-    <%= link_to 'back', products_path, class: 'ui blue button' %>
+    <%= link_to 'Continue Shopping', products_path, class: 'ui blue button' %>
 <% end %>

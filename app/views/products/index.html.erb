@@ -40,8 +40,12 @@
                     <td>
                         <%= form_for @order_details, remote: true do |add| %>
                             <%= add.hidden_field :product_id, :value => product.id %>
-                            <%= add.number_field :quantity, :value => 1, :min => 1 %>
-                            <%= add.submit 'Add To Cart', class: 'ui blue button' %>
+                            <% if product.in_stock %>
+                                <%= add.number_field :quantity, :value => 1, :min => 1 %>
+                                <%= add.submit 'Add To Cart', class: 'ui blue button' %>
+                            <% else %>
+                                <p>Currently Unavailable</p>
+                            <% end %>
                         <% end %>
                     </td>
                 <% end %>
